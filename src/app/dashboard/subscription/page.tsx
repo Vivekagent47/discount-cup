@@ -81,7 +81,12 @@ export default async function SubscriptionPage() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form action={createCustomerPortalSession}>
+              <form
+                action={async () => {
+                  "use server";
+                  await createCustomerPortalSession();
+                }}
+              >
                 <Button
                   variant="accent"
                   className="text-lg rounded-lg"
@@ -128,11 +133,14 @@ function PricingCard({
       </CardHeader>
       <CardContent>
         <form
-          action={
-            name === "Free"
-              ? createCancelSession
-              : createCheckoutSession.bind(null, name)
-          }
+          action={async () => {
+            "use server";
+            if (name === "Free") {
+              await createCancelSession();
+            } else {
+              await createCheckoutSession.bind(null, name)();
+            }
+          }}
         >
           <Button
             disabled={isCurrent}
