@@ -12,7 +12,7 @@ import { subscriptionTiersInOrder } from "@/data/subscriptionTiers";
 import { formatCompactNumber } from "@/lib/formatters";
 import { cn } from "@/lib/utils";
 import { SignUpButton } from "@clerk/nextjs";
-import { ArrowRightIcon, CheckIcon } from "lucide-react";
+import { ArrowRightIcon, BarChart2, CheckIcon, Globe, Zap } from "lucide-react";
 import Link from "next/link";
 import { ReactNode } from "react";
 // import { ClerkIcon } from "./_icons/Clerk";
@@ -74,6 +74,42 @@ export default function HomePage() {
           </div>
         </div>
       </section> */}
+
+      <section>
+        <div className="container py-16 flex gap-16 px-8 md:px-16">
+          {[
+            {
+              icon: BarChart2,
+              title: "Smart Analytics",
+              description:
+                "Gain insights into pricing trends and market dynamics.",
+            },
+            {
+              icon: Globe,
+              title: "Global Reach",
+              description:
+                "Optimize prices for different regions and currencies.",
+            },
+            {
+              icon: Zap,
+              title: "Dynamic Pricing",
+              description:
+                "Automatically adjust prices based on real-time market conditions.",
+            },
+          ].map((feature, index) => (
+            <Card
+              key={index}
+              className="bg-white bg-opacity-50 backdrop-filter backdrop-blur-lg hover:shadow-lg transition-all duration-300"
+            >
+              <CardContent className="p-6">
+                <feature.icon className="h-12 w-12 text-accent mb-4" />
+                <h2 className="text-xl font-semibold mb-2">{feature.title}</h2>
+                <p className="text-gray-600">{feature.description}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
       <section id="pricing" className=" px-8 py-16 bg-accent/5">
         <h2 className="text-4xl text-center text-balance font-semibold mb-8">
           Pricing software which pays for itself 20x over
